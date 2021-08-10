@@ -1,7 +1,7 @@
 // dom elements
 const time = document.getElementById("time"),
   greeting = document.getElementById("greeting"),
-  userName = document.getElementById("userName"),
+  displayName = document.getElementById("userName"),
   focus = document.getElementById("focus");
 
 // show time
@@ -53,25 +53,50 @@ function setBgGreet() {
 
 // get name
 function getName() {
-  console.log(localStorage.getItem("userName"));
-  if (localStorage.getItem("userName" !== null)) {
-    userName.textContent = localStorage.getItem("userName");
+  if (localStorage.getItem("userName") == null) {
+    displayName.textContent = "[Enter Name]";
   } else {
-    console.log(123);
-    userName.textContent = "[Enter Name]";
+    displayName.textContent = localStorage.getItem("userName");
+  }
+}
+
+function setName(e) {
+  if (e.type === "keypress") {
+    // make sure enter is pressed
+    if (e.which === 13 || e.keyCode === 13) {
+      localStorage.setItem("userName", e.target.innerText);
+      userName.blur();
+    }
+  } else {
+    localStorage.setItem("userName", e.target.innerText);
   }
 }
 
 // get focus
 function getFocus() {
-  console.log(localStorage.getItem("focus"));
-  if (localStorage.getItem("focus" !== null)) {
-    focus.textContent = localStorage.getItem("focus");
-  } else {
-    console.log(123);
+  if (localStorage.getItem("focus") === null) {
     focus.textContent = "[Enter Focus]";
+  } else {
+    focus.textContent = localStorage.getItem("focus");
   }
 }
+
+function setFocus(e) {
+  if (e.type === "keypress") {
+    // make sure enter is pressed
+    if (e.which === 13 || e.keyCode === 13) {
+      localStorage.setItem("focus", e.target.innerText);
+      focus.blur();
+    }
+  } else {
+    localStorage.setItem("focus", e.target.innerText);
+  }
+}
+
+displayName.addEventListener("keypress", setName);
+displayName.addEventListener("blur", setName);
+focus.addEventListener("keypress", setFocus);
+focus.addEventListener("blur", setFocus);
 
 // run
 showTime();
