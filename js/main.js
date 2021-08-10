@@ -1,7 +1,7 @@
 // dom elements
 const time = document.getElementById("time"),
   greeting = document.getElementById("greeting"),
-  name = document.getElementById("name"),
+  userName = document.getElementById("userName"),
   focus = document.getElementById("focus");
 
 // show time
@@ -20,7 +20,7 @@ function showTime() {
   // output time
   time.innerHTML = `${hour}<span>:</span>${addZero(min)}<span>:</span>${addZero(
     sec
-  )}`;
+  )} ${amPm}`;
 
   setTimeout(showTime, 1000);
 }
@@ -42,7 +42,7 @@ function setBgGreet() {
   } else if (hour < 18) {
     // afternoon
     document.body.style.backgroundImage = "url(../img/afternoon.jpg)";
-    greeting.textContent = "Good Afteroon, ";
+    greeting.textContent = "Good Afternoon, ";
   } else {
     // evening
     document.body.style.backgroundImage = "url(../img/evening.jpg)";
@@ -51,6 +51,18 @@ function setBgGreet() {
   }
 }
 
+// get name
+function getName() {
+  console.log(localStorage.getItem("userName"));
+  if (localStorage.getItem("userName" !== null)) {
+    userName.textContent = localStorage.getItem("userName");
+  } else {
+    console.log(123);
+    userName.textContent = "[Enter Name]";
+  }
+}
+
 // run
 showTime();
 setBgGreet();
+getName();
