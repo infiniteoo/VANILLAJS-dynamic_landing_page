@@ -27,3 +27,9 @@ h2 {
   margin-bottom: 0.5rem;
   opacity: 0.6;
 }
+
+@media (max-width: 700px) {
+  #time {
+    font-size: 6rem;
+  }
+}
